@@ -263,6 +263,8 @@ LOCAL_CPPFLAGS 	:= -DBSD=1 -ffast-math -Os -funroll-loops -std=c++11
 LOCAL_LDLIBS 	:= -ljnigraphics -llog -lz -latomic -lEGL -lGLESv2 -landroid
 LOCAL_STATIC_LIBRARIES := webp sqlite tgnet avformat avcodec avresample avutil voip flac
 
+LOCAL_SHORT_COMMANDS :=true
+
 LOCAL_SRC_FILES     := \
 ./opus/src/opus.c \
 ./opus/src/opus_decoder.c \
