@@ -4,6 +4,8 @@
 #include <android/log.h>
 #include <jni.h>
 
+//#include <algorithm>
+
 #define LOG_TAG "tmessages_native"
 #ifndef LOG_DISABLED
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -17,11 +19,11 @@
 #define LOGV(...)
 #endif
 
-#ifndef max
-#define max(x, y) ((x) > (y)) ? (x) : (y)
+#ifndef MAX
+#	define MAX(x, y) ((x) > (y)) ? (x) : (y)
 #endif
-#ifndef min
-#define min(x, y) ((x) < (y)) ? (x) : (y)
+#ifndef MIN
+#	define MIN(x, y) ((x) < (y)) ? (x) : (y)
 #endif
 
 void throwException(JNIEnv *env, char *format, ...);
