@@ -80,7 +80,7 @@ android {
         debug {
             debuggable true
             jniDebuggable true
-            signingConfig signingConfigs.debug
+           // signingConfig signingConfigs.debug
             //applicationIdSuffix ".beta"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -89,7 +89,7 @@ android {
         HA {
             debuggable false
             jniDebuggable false
-            signingConfig signingConfigs.debug
+            //signingConfig signingConfigs.debug
             //applicationIdSuffix ".beta"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -98,17 +98,12 @@ android {
         release {
             debuggable false
             jniDebuggable false
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        foss {
-            debuggable false
-            jniDebuggable false
-            signingConfig signingConfigs.release
-        }
     }
 
     defaultConfig.versionCode = 1497
@@ -125,10 +120,6 @@ android {
         manifest.srcFile 'config/release/AndroidManifest.xml'
     }
 
-    sourceSets.foss {
-        manifest.srcFile 'config/foss/AndroidManifest.xml'
-    }
-
     flavorDimensions "minApi"
 
     productFlavors {
@@ -138,14 +129,6 @@ android {
             }
             ext {
                 abiVersionCode = 1
-            }
-        }
-        x86 {
-            ndk {
-                abiFilters "x86"
-            }
-            ext {
-                abiVersionCode = 2
             }
         }
         armv7_SDK23 {
@@ -161,21 +144,6 @@ android {
             minSdkVersion 23
             ext {
                 abiVersionCode = 3
-            }
-        }
-        x86_SDK23 {
-            ndk {
-                abiFilters "x86"
-            }
-            sourceSets.debug {
-                manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
-            }
-            sourceSets.release {
-                manifest.srcFile 'config/release/AndroidManifest_SDK23.xml'
-            }
-            minSdkVersion 23
-            ext {
-                abiVersionCode = 4
             }
         }
         arm64 {
@@ -237,29 +205,15 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            output.processManifest.doLast {
-                def abiVersion = variant.productFlavors.get(0).abiVersionCode
-                String manifestPath = "$manifestOutputDirectory/AndroidManifest.xml"
-                def manifestContent = file(manifestPath).getText()
-                manifestContent = manifestContent.replace(String.format('android:versionCode="%d"', defaultConfig.versionCode), String.format('android:versionCode="%s"', defaultConfig.versionCode * 10 + abiVersion))
-                file(manifestPath).write(manifestContent)
-            }
-        }
-    }
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
         versionName "5.3.1"
 
-		vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
-
         externalNativeBuild {
             ndkBuild {
-                arguments "NDK_APPLICATION_MK:=jni/Application.mk", "APP_PLATFORM:=android-16", "-j8"
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+                arguments "NDK_APPLICATION_MK:=jni/Application.mk", "APP_PLATFORM:=android-17", "-j8"
+                abiFilters "armeabi-v7a", "arm64-v8a"
             }
         }
     }
