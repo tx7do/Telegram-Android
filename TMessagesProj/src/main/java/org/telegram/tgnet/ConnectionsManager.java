@@ -455,7 +455,9 @@ public class ConnectionsManager {
     }
 
     public static void onRequestNewServerIpAndPort(final int second, final int currentAccount) {
-        Utilities.stageQueue.postRunnable(() -> {
+        // @benqi: Patch by nebulaim
+        return;
+/*        Utilities.stageQueue.postRunnable(() -> {
             if (currentTask != null || second == 0 && Math.abs(lastDnsRequestTime - System.currentTimeMillis()) < 10000 || !ApplicationLoader.isNetworkOnline()) {
                 if (BuildVars.LOGS_ENABLED) {
                     FileLog.d("don't start task, current task = " + currentTask + " next task = " + second + " time diff = " + Math.abs(lastDnsRequestTime - System.currentTimeMillis()) + " network = " + ApplicationLoader.isNetworkOnline());
@@ -485,7 +487,7 @@ public class ConnectionsManager {
                 task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
                 currentTask = task;
             }
-        });
+        });*/
     }
 
     public static void onProxyError() {

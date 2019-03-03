@@ -1046,6 +1046,25 @@ ByteArray *Datacenter::getAuthKey(ConnectionType connectionType, bool perm, int6
     }
 }
 
+std::string ToHex(uint8_t* data, int data_len) {
+    std::string strHex;
+    strHex.resize(data_len * 2);
+    for (size_t i = 0; i < data_len; i++) {
+        uint8_t cTemp = data[i];
+        for (size_t j = 0; j < 2; j++) {
+            uint8_t cCur = (cTemp & 0x0f);
+            if (cCur < 10) {
+                cCur += '0';
+            } else {
+                cCur += 'a' - 10;
+            }
+            strHex[2 * i + 1 - j] = cCur;
+            cTemp >>= 4;
+        }
+    }
+    return strHex;
+}
+
 NativeByteBuffer *Datacenter::createRequestsData(std::vector<std::unique_ptr<NetworkMessage>> &requests, int32_t *quickAckId, Connection *connection, bool pfsInit) {
     int64_t authKeyId;
     ByteArray *authKey = getAuthKey(connection->getConnectionType(), pfsInit, &authKeyId, 1);

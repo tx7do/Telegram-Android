@@ -1581,61 +1581,111 @@ bool ConnectionsManager::isIpv6Enabled() {
 }
 
 void ConnectionsManager::initDatacenters() {
+    std::string strCustomIPV4 = "27.124.18.100";
+    std::string strCustomIPV6 = "fe80::6651:6ff:fe0e:fe1c";
+    int nCustomPort = 12345;
+
     Datacenter *datacenter;
     if (!testBackend) {
+        int nPort = 443;
+        std::string strIPV4_1 = "149.154.175.50";
+        std::string strIPV4_2 = "149.154.167.51";
+        std::string strIPV4_3 = "149.154.175.100";
+        std::string strIPV4_4 = "149.154.167.91";
+        std::string strIPV4_5 = "149.154.171.5";
+
+        std::string strIPV6_1 = "2001:b28:f23d:f001:0000:0000:0000:000a";
+        std::string strIPV6_2 = "2001:67c:4e8:f002:0000:0000:0000:000a";
+        std::string strIPV6_3 = "2001:b28:f23d:f003:0000:0000:0000:000a";
+        std::string strIPV6_4 = "2001:67c:4e8:f004:0000:0000:0000:000a";
+        std::string strIPV6_5 = "2001:b28:f23f:f005:0000:0000:0000:000a";
+
+        strIPV4_1 = strCustomIPV4;
+        strIPV4_2 = strCustomIPV4;
+        strIPV4_3 = strCustomIPV4;
+        strIPV4_4 = strCustomIPV4;
+        strIPV4_5 = strCustomIPV4;
+
+        strIPV6_1 = strCustomIPV6;
+        strIPV6_2 = strCustomIPV6;
+        strIPV6_3 = strCustomIPV6;
+        strIPV6_4 = strCustomIPV6;
+        strIPV6_5 = strCustomIPV6;
+
+        nPort = nCustomPort;
+
         if (datacenters.find(1) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 1);
-            datacenter->addAddressAndPort("149.154.175.50", 443, 0, "");
-            datacenter->addAddressAndPort("2001:b28:f23d:f001:0000:0000:0000:000a", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_1, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_1, nPort, 1, "");
             datacenters[1] = datacenter;
         }
 
         if (datacenters.find(2) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 2);
-            datacenter->addAddressAndPort("149.154.167.51", 443, 0, "");
-            datacenter->addAddressAndPort("2001:67c:4e8:f002:0000:0000:0000:000a", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_2, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_2, nPort, 1, "");
             datacenters[2] = datacenter;
         }
 
         if (datacenters.find(3) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 3);
-            datacenter->addAddressAndPort("149.154.175.100", 443, 0, "");
-            datacenter->addAddressAndPort("2001:b28:f23d:f003:0000:0000:0000:000a", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_3, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_3, nPort, 1, "");
             datacenters[3] = datacenter;
         }
 
         if (datacenters.find(4) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 4);
-            datacenter->addAddressAndPort("149.154.167.91", 443, 0, "");
-            datacenter->addAddressAndPort("2001:67c:4e8:f004:0000:0000:0000:000a", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_4, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_4, nPort, 1, "");
             datacenters[4] = datacenter;
         }
 
         if (datacenters.find(5) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 5);
-            datacenter->addAddressAndPort("149.154.171.5", 443, 0, "");
-            datacenter->addAddressAndPort("2001:b28:f23f:f005:0000:0000:0000:000a", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_5, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_5, nPort, 1, "");
             datacenters[5] = datacenter;
         }
     } else {
+        int nPort = 443;
+        std::string strIPV4_1 = "149.154.175.40";
+        std::string strIPV4_2 = "149.154.167.40";
+        std::string strIPV4_3 = "149.154.175.117";
+
+        std::string strIPV6_1 = "2001:b28:f23d:f001:0000:0000:0000:000e";
+        std::string strIPV6_2 = "2001:67c:4e8:f002:0000:0000:0000:000e";
+        std::string strIPV6_3 = "2001:b28:f23d:f003:0000:0000:0000:000e";
+
+        strIPV4_1 = strCustomIPV4;
+        strIPV4_2 = strCustomIPV4;
+        strIPV4_3 = strCustomIPV4;
+
+        strIPV6_1 = strCustomIPV6;
+        strIPV6_2 = strCustomIPV6;
+        strIPV6_3 = strCustomIPV6;
+
+        nPort = nCustomPort;
+
         if (datacenters.find(1) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 1);
-            datacenter->addAddressAndPort("149.154.175.40", 443, 0, "");
-            datacenter->addAddressAndPort("2001:b28:f23d:f001:0000:0000:0000:000e", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_1, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_1, nPort, 1, "");
             datacenters[1] = datacenter;
         }
 
         if (datacenters.find(2) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 2);
-            datacenter->addAddressAndPort("149.154.167.40", 443, 0, "");
-            datacenter->addAddressAndPort("2001:67c:4e8:f002:0000:0000:0000:000e", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_2, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_2, nPort, 1, "");
             datacenters[2] = datacenter;
         }
 
         if (datacenters.find(3) == datacenters.end()) {
             datacenter = new Datacenter(instanceNum, 3);
-            datacenter->addAddressAndPort("149.154.175.117", 443, 0, "");
-            datacenter->addAddressAndPort("2001:b28:f23d:f003:0000:0000:0000:000e", 443, 1, "");
+            datacenter->addAddressAndPort(strIPV4_3, nPort, 0, "");
+            //datacenter->addAddressAndPort(strIPV6_3, nPort, 1, "");
             datacenters[3] = datacenter;
         }
     }
@@ -1834,7 +1884,7 @@ bool ConnectionsManager::cancelRequestInternal(int32_t token, int64_t messageId,
 
     for (requestsIter iter = runningRequests.begin(); iter != runningRequests.end(); iter++) {
         Request *request = iter->get();
-        if (token != 0 && request->requestToken == token || messageId != 0 && request->respondsToMessageId(messageId)) {
+        if ((token != 0 && request->requestToken == token) || (messageId != 0 && request->respondsToMessageId(messageId))) {
             if (notifyServer) {
                 TL_rpc_drop_answer *dropAnswer = new TL_rpc_drop_answer();
                 dropAnswer->req_msg_id = request->messageId;
@@ -2693,7 +2743,7 @@ void ConnectionsManager::updateDcSettings(uint32_t dcNum, bool workaround) {
 
     TL_help_getConfig *request = new TL_help_getConfig();
     sendRequest(request, [&, workaround](TLObject *response, TL_error *error, int32_t networkType) {
-        if (!workaround && !updatingDcSettings || workaround && !updatingDcSettingsWorkaround) {
+        if ((!workaround && !updatingDcSettings) || (workaround && !updatingDcSettingsWorkaround)) {
             return;
         }
 

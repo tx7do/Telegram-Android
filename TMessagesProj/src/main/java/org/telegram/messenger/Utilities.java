@@ -161,6 +161,10 @@ public class Utilities {
     }
 
     public static boolean isGoodPrime(byte[] prime, int g) {
+        // @benqi: Patch by nebulaim
+        return true;
+
+        /*
         if (!(g >= 2 && g <= 7)) {
             return false;
         }
@@ -208,6 +212,7 @@ public class Utilities {
 
         BigInteger dhBI2 = dhBI.subtract(BigInteger.valueOf(1)).divide(BigInteger.valueOf(2));
         return !(!dhBI.isProbablePrime(30) || !dhBI2.isProbablePrime(30));
+        */
     }
 
     public static boolean isGoodGaAndGb(BigInteger g_a, BigInteger p) {
